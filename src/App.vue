@@ -6,6 +6,8 @@
     <div v-for="(roomName, i) in roomList" :key="i">
       <h4 class="red" :style="style1">{{ roomName }}</h4>
       <p>{{ price1[i] }}만원</p>
+      <button v-on:click="increase">허위매물신고</button>
+      <span>신고수 : {{ 신고수[i] }}</span>
     </div>
   </div>
 </template>
@@ -15,12 +17,19 @@ export default {
   name: "App",
   data() {
     return {
+      신고수: [0, 0, 0],
       price1: [60, 50, 70],
       style1: "color:red",
       roomList: ["역삼동원룸", "천호동원룸", "마포구원룸"],
       menuList: ["Home", "Shop", "About"],
     };
   },
+  methods: {
+    increase() {
+      this.신고수 += 1;
+    },
+  },
+  components: {},
 };
 </script>
 
