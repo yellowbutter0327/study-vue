@@ -1,16 +1,15 @@
 <template>
   <div>
-    <div class="black-bg" v-if="isOpen == true">
-      <div class="white-bg">
-        <h4>{{ 원룸들[누른거].title }}</h4>
-        <p>{{ 원룸들[누른거].content }}</p>
-        <button @click="isOpen = false">닫기</button>
-      </div>
-    </div>
-
     <div class="menu">
       <a v-for="(menuName, i) in menuList" :key="i">{{ menuName }}</a>
     </div>
+    <ModalYellow
+      :원룸들="원룸들"
+      :누른거="누른거"
+      :isOpen="isOpen"
+    ></ModalYellow
+    >ModalYellow/>
+    <DiscountSection></DiscountSection>
 
     <div v-for="(a, i) in 원룸들" :key="i">
       <img :src="a.image" class="room-image" />
@@ -33,6 +32,8 @@
 
 <script>
 import data from "./assets/oneroom.js";
+import DiscountSection from "./DiscountSection.vue";
+import ModalYellow from "./ModalYellow.vue";
 
 export default {
   name: "App",
@@ -49,7 +50,10 @@ export default {
     };
   },
   methods: {},
-  components: {},
+  components: {
+    DiscountSection: DiscountSection,
+    ModalYellow: ModalYellow,
+  },
 };
 </script>
 
@@ -67,6 +71,12 @@ body {
 }
 div {
   box-sizing: border-box;
+}
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 .black-bg {
   width: 100%;
