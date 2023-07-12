@@ -7,26 +7,17 @@
       :원룸들="원룸들"
       :누른거="누른거"
       :isOpen="isOpen"
-    ></ModalYellow
-    >ModalYellow/>
-    <DiscountSection></DiscountSection>
-
-    <div v-for="(a, i) in 원룸들" :key="i">
-      <img :src="a.image" class="room-image" />
-      <h4
-        class="red"
-        :style="style1"
-        @click="
-          isOpen = true;
-          누른거 = i;
-        "
-      >
-        {{ a.title }}
-      </h4>
-      <p>{{ a.price }}원</p>
-      <button @click="reportNumber[i] += 1">허위매물신고</button>
-      <span>신고수 : {{ reportNumber[i] }}</span>
-    </div>
+    ></ModalYellow>
+    <DiscountSection
+      v-bind="오브젝트"
+      :이름="오브젝트.name"
+      :나이="오브젝트.age"
+    ></DiscountSection>
+    <RoomCard
+      :원룸="원룸들[i]"
+      v-for="(작명, i) in 원룸들"
+      :key="작명"
+    ></RoomCard>
   </div>
 </template>
 
@@ -34,11 +25,13 @@
 import data from "./assets/oneroom.js";
 import DiscountSection from "./DiscountSection.vue";
 import ModalYellow from "./ModalYellow.vue";
+import RoomCard from "./RoomCard.vue";
 
 export default {
   name: "App",
   data() {
     return {
+      오브젝트: { name: "kim", age: 20 },
       누른거: 0,
       원룸들: data,
       isOpen: false,
@@ -53,6 +46,7 @@ export default {
   components: {
     DiscountSection: DiscountSection,
     ModalYellow: ModalYellow,
+    RoomCard: RoomCard,
   },
 };
 </script>
