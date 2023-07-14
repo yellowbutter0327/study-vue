@@ -16,6 +16,10 @@
     <RoomCard
       :원룸="원룸들[i]"
       v-for="(작명, i) in 원룸들"
+      @openModal="
+        isOpen = true;
+        누른거 = $event;
+      "
       :key="작명"
     ></RoomCard>
   </div>
