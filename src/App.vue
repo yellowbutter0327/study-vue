@@ -5,12 +5,14 @@
 
       <!-- <a v-for="작명 in 반복할 횟수" :key ="작명">  -->
     </div>
-    <ModalYellow
-      :원룸들="원룸들"
-      :누른거="누른거"
-      :isOpen="isOpen"
-      @closeModal="isOpen = false"
-    ></ModalYellow>
+    <transition name="fade">
+      <ModalYellow
+        :원룸들="원룸들"
+        :누른거="누른거"
+        :isOpen="isOpen"
+        @closeModal="isOpen = false"
+      ></ModalYellow>
+    </transition>
     <DiscountSection v-bind="오브젝트" />
     <RoomCard
       :원룸="원룸들[i]"
@@ -82,6 +84,7 @@ body {
 div {
   box-sizing: border-box;
 }
+
 .discount {
   background: #eee;
   padding: 10px;
@@ -116,5 +119,25 @@ div {
 .room-img {
   width: 100%;
   margin-top: 40px;
+}
+/* 
+.fade-leave-from {
+  opacity: 0;
+}
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-leave-to {
+  opacity: 1;
+} */
+/* animation 주고 싶을때 class 3개 */
+.fade-enter-from {
+  transform: translateY(-1000px);
+}
+.fade-enter-active {
+  transition: all 1s;
+}
+.fade-enter-to {
+  transform: translateY(0px);
 }
 </style>

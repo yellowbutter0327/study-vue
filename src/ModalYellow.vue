@@ -31,6 +31,17 @@ export default {
       // 숫자가 들어가야할때는 v-model.number 위처럼
     };
   },
+  watch: {
+    //month라는 데이터가 변할때마다 watcher도 실행된다.
+    // 함수명을 무조건 감시할 데이터로 설정해놓아야 한다.
+    //vue 전용 form validation 라이브러리 설치하면 편하다.
+    month(a) {
+      if (isNaN(a) === true) {
+        alert("문자 입력하지 마라");
+        this.month = 1;
+      }
+    },
+  },
   props: {
     원룸들: Array,
     누른거: Number,
