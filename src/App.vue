@@ -2,30 +2,39 @@
   <div>
     <div class="menu">
       <a v-for="(menuName, i) in menuList" :key="i">{{ menuName }}</a>
+
+      <!-- <a v-for="작명 in 반복할 횟수" :key ="작명">  -->
     </div>
     <ModalYellow
       :원룸들="원룸들"
       :누른거="누른거"
       :isOpen="isOpen"
+      @closeModal="isOpen = false"
     ></ModalYellow>
-    <DiscountSection
-      v-bind="오브젝트"
-      :이름="오브젝트.name"
-      :나이="오브젝트.age"
-    ></DiscountSection>
+    <DiscountSection v-bind="오브젝트" />
     <RoomCard
       :원룸="원룸들[i]"
       v-for="(작명, i) in 원룸들"
       @openModal="
+        //부모가 메세지 수신할 때는 자식컴포넌트 골뱅이직명힌가 = 어쩌구,
         isOpen = true;
+        // props로 전달되는 데이터들은 수정하면 안된다. 부모에 있는 데이터 수정하고 싶으면
+        // custom event 해야한다.
         누른거 = $event;
       "
       :key="작명"
     ></RoomCard>
+    <!-- 자식이 보낸 데이터는 $event 변수에 담겨 있음 -->
+    <!-- 컴포넌트 : 작명 = "들어갈 내용 " -->
+    <!-- 반복하려면 v-for="?? in 몇번반복할건지" :key="" -->
   </div>
+  <!-- props 보낼 때 댜앙한 자료형 입력 가능하다. :작명 = "Array,Object" -->
+  <!-- props 보낼때 다양한 자료형 입력 가능 
+작명 = "문자자료" (콜론을 안붙이면 문자로 전달된다.), :작명 = "숫자자료" -->
 </template>
 
 <script>
+// 컴포넌트 불러오고 싶을 때 import 컴포넌트 from 경로
 import data from "./assets/oneroom.js";
 import DiscountSection from "./DiscountSection.vue";
 import ModalYellow from "./ModalYellow.vue";
@@ -36,6 +45,9 @@ export default {
   data() {
     return {
       오브젝트: { name: "kim", age: 20 },
+      // 여기서 name, age 따로 보내고 싶으면
+      // <Discount :이름 = "오브젝트.name" , 나이= "오브젝트.age"/>
+      // 이렇게 할필요없이 object의 경우에는 <Discount v-bind = "오브젝트명"/>하면 된다.
       누른거: 0,
       원룸들: data,
       isOpen: false,
